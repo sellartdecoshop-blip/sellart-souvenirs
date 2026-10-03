@@ -146,9 +146,9 @@ small{color:var(--muted)}
 <script>
 // Poné acá el número de WhatsApp con código de país, sin + ni espacios (ej: 5492345123456)
 var WA_NUMBER = "5492352446861";
-var AROMAS = ["No estoy segura/o, aconsejame","Sin fragancia","Vainilla","Vainilla y coco","Vainilla canela y chocolate","Vainilla rosa búlgara","Lavanda extra","Tilo y lavanda","Lavander citrus","Lemon grass","Bright lemon","Limón","Naranja","Cítrico","Coco y lima","Mango y maracuyá","Fresias","Jazmín","Azahar","Nardo","Peonías","Magnolia y camelias","Real gardenia","Orquídea roja","Tea rose","Base de rosas","Madre selva","Frutos rojos","Manzana y canela","Cedro","Bosque","Madera y bergamota","Chocolate","Café Venecia","Cookies","Hindú"];
+var AROMAS = ["Floral","Cítricos","Dulces","Gourmand","Mejor asesorame"];
 var $ = function(id){return document.getElementById(id)};
-var lines = [{f:"Lata",a:AROMAS[0],q:10}];
+var lines = [{f:"Lata",a:AROMAS[4],q:10}];
 var frag = "Sí";
 function chk(n){var e=document.querySelector('input[name="'+n+'"]:checked');return e?e.value:"No"}
 
@@ -157,7 +157,7 @@ function render(){
   $("lines").innerHTML = lines.map(function(l,i){
     return '<div class="line">'+
       '<div class="row"><div><label for="f'+i+'">Formato</label><select id="f'+i+'" data-i="'+i+'" data-k="f"><option'+(l.f==="Lata"?" selected":"")+'>Lata</option><option'+(l.f==="Vidrio"?" selected":"")+'>Vidrio</option></select></div>'+
-      '<div'+(frag==="No"?' hidden':'')+'><label for="a'+i+'">Aroma</label><select id="a'+i+'" data-i="'+i+'" data-k="a">'+AROMAS.map(function(a){return '<option'+(a===l.a?" selected":"")+'>'+esc(a)+'</option>'}).join("")+'</select></div></div>'+
+      '<div'+(frag==="No"?' hidden':'')+'><label for="a'+i+'">¿Qué tipo de aroma te gustaría?</label><select id="a'+i+'" data-i="'+i+'" data-k="a">'+AROMAS.map(function(a){return '<option'+(a===l.a?" selected":"")+'>'+esc(a)+'</option>'}).join("")+'</select></div></div>'+
       '<div class="qty"><b>Cantidad</b><div class="step"><button type="button" data-d="-1" data-i="'+i+'" aria-label="Menos">−</button>'+
       '<input type="number" inputmode="numeric" min="1" value="'+l.q+'" data-i="'+i+'" data-k="q" aria-label="Cantidad"><button type="button" data-d="1" data-i="'+i+'" aria-label="Más">+</button></div></div>'+
       (lines.length>1?'<button type="button" class="rm" data-rm="'+i+'">Quitar</button>':'')+'</div>';
@@ -198,7 +198,7 @@ document.addEventListener("click",function(e){
   if(b.dataset.d){var l=lines[b.dataset.i];l.q=Math.max(1,(parseInt(l.q)||0)+parseInt(b.dataset.d));render()}
   else if(b.dataset.rm){lines.splice(b.dataset.rm,1);render()}
 });
-$("add").onclick=function(){lines.push({f:"Vidrio",a:AROMAS[0],q:10});render()};
+$("add").onclick=function(){lines.push({f:"Vidrio",a:AROMAS[4],q:10});render()};
 $("wa").addEventListener("click",function(e){if(!valid())e.preventDefault()});
 $("copy").onclick=function(){
   if(!valid())return;
